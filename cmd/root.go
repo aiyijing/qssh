@@ -8,8 +8,8 @@ import (
 
 var RootCmd = &cobra.Command{
 	Use:   "qssh",
-	Short: "qssh quickly connects and manages SSH hosts",
-	Long:  `qssh quickly connects and manages SSH hosts`,
+	Short: "qssh quickly connects and manages ssh machines",
+	Long:  `qssh quickly connects and manages ssh machines`,
 }
 
 func init() {

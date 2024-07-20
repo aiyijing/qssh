@@ -18,10 +18,11 @@ var (
 
 var execCommand = &cobra.Command{
 	Use:   "exec [script]",
-	Short: "Execute commands on SSH hosts",
-	Long:  `Execute commands or scripts on SSH hosts using batch processing.`,
+	Short: "Execute commands on remote hosts",
+	Long:  `Execute commands or scripts on hosts using batch processing.`,
 	Example: `
-	qssh exec "uname -r" --ignore-range 0-1 --host 192.168.1.101
+#  Execute commands on remote hosts
+qssh exec "uname -r" --ignore-range 0-1 --host 192.168.1.101
 `,
 	Args: cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {

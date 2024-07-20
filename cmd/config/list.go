@@ -11,9 +11,15 @@ import (
 var listCmd = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
-	Short:   "list ssh machines",
-	Long:    `list ssh machines`,
-	Example: `qssh config list`,
+	Short:   "list machines",
+	Long:    `list machines`,
+	Example: `
+# Using the full command
+qssh config list
+
+# Using the shorthand command
+qssh cfg ls
+`,
 	Run: func(cmd *cobra.Command, args []string) {
 		machines, _ := config.QsshConfig.List()
 		for i, m := range machines {

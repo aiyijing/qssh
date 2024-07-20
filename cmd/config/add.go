@@ -2,7 +2,7 @@ package config
 
 import (
 	"fmt"
-	osUser "os/user"
+	"os/user"
 
 	"github.com/spf13/cobra"
 
@@ -16,15 +16,19 @@ var (
 )
 
 var addCmd = &cobra.Command{
-	Use:     "add [host]",
-	Short:   "add ssh machine",
-	Long:    `add ssh machine`,
-	Example: `qssh config add root@192.168.1.1 -u root -p 22 -P aiyijing -k ~/root/.ssh/id_rsa`,
-	Args:    cobra.ExactArgs(1),
+	Use:   "add [host]",
+	Short: "add machine",
+	Long:  `add machine`,
+	Example: `# Adding a machine with a password
+qssh config add root@192.168.1.1 -P admin
+
+# Adding a machine with a private key
+qssh config add 192.168.1.1 -u root -p 322 -k ~/root/.ssh/id_rsa`,
+	Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		user, host := util.ParseConnArgs(args[0])
-		if user != "" {
-			machine.User = user
+		u, host := util.ParseConnArgs(args[0])
+		if u != "" {
+			machine.User = u
 		}
 		if host != "" {
 			machine.Host = host
@@ -39,7 +43,8 @@ var addCmd = &cobra.Command{
 }
 
 func init() {
-	u, _ := osUser.Current()
+	u, _ := user.Current()
+
 	addCmd.Flags().StringVarP(&(machine.User), "user", "u", u.Name, "ssh user")
 	addCmd.Flags().StringVarP(&(machine.Password), "password", "P", "", "ssh password")
 	addCmd.Flags().IntVarP(&(machine.Port), "port", "p", 22, "ssh port")

@@ -11,10 +11,17 @@ import (
 var removeCmd = &cobra.Command{
 	Use:     "remove [host]",
 	Aliases: []string{"rm"},
-	Short:   "remove ssh machine",
-	Long:    `remove ssh machine`,
-	Example: `qssh config rm 192.168.1.1`,
-	Args:    cobra.ExactArgs(1),
+	Short:   "remove machine",
+	Long:    `remove machine`,
+	Example: `
+# Using the full command
+qssh config remove 192.168.1.1
+
+# Using the shorthand command
+qssh cfg rm 192.168.1.1
+
+`,
+	Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		host := args[0]
 		if host != "" {

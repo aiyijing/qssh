@@ -17,11 +17,13 @@ var (
 )
 
 var sshCmd = &cobra.Command{
-	Use:     "ssh",
-	Short:   "Connect to an SSH host",
-	Long:    `Connect to an SSH host using the provided configurations.`,
-	Example: "qssh ssh root@192.168.1.1 -p 22 -k ~/.ssh/id_rsa",
-	Args:    cobra.ExactArgs(1),
+	Use:   "ssh",
+	Short: "Connect to an ssh machines",
+	Long:  `Connect to an ssh machines using the provided configurations.`,
+	Example: `
+qssh ssh root@192.168.1.1 -p 22 -k ~/.ssh/id_rsa
+`,
+	Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		sshArgs := args[0]
 		user, host := util.ParseConnArgs(sshArgs)

@@ -15,7 +15,7 @@
 要从源代码构建 `qssh`，请确保您已安装 Go 语言环境。
 
 ```sh
-git clone https://github.com/yourusername/qssh.git
+git clone https://github.com/aiyijing/qssh.git
 cd qssh
 go build -o qssh
 ```

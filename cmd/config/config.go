@@ -5,8 +5,8 @@ import "github.com/spf13/cobra"
 var ConfigCmd = &cobra.Command{
 	Use:     "config",
 	Aliases: []string{"cfg"},
-	Short:   "config mange ssh machine ",
-	Long:    `config mange ssh machine `,
+	Short:   "config manage machine ",
+	Long:    `config manage machine `,
 }
 
 func init() {
