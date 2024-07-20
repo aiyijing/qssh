@@ -44,8 +44,8 @@ qssh exec "uname -r" --ignore-range 0-1 --host 192.168.1.101
 }
 
 func init() {
-	execCommand.Flags().StringVarP(&ignoreRange, "ignore-range", "i", "", "ignore ssh machine range")
-	execCommand.Flags().StringVarP(&host, "host", "H", "", "special ssh machine")
+	execCommand.Flags().StringVarP(&ignoreRange, "ignore-range", "i", "", "ignore machine range")
+	execCommand.Flags().StringVarP(&host, "host", "H", "", "special host")
 }
 
 func batchExec(script string, machines map[int]*config.Machine) {
@@ -63,7 +63,7 @@ func batchExec(script string, machines map[int]*config.Machine) {
 
 func listMachinesByRange(rgs util.Ranges, specialHost string) map[int]*config.Machine {
 	var machines = make(map[int]*config.Machine)
-	ms, _ := config.QsshConfig.List()
+	ms, _ := config.QSSHConfig.List()
 	for i, m := range ms {
 		if rgs.Contain(i) && m.Host != specialHost {
 			continue

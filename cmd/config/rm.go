@@ -25,7 +25,7 @@ qssh cfg rm 192.168.1.1
 	Run: func(cmd *cobra.Command, args []string) {
 		host := args[0]
 		if host != "" {
-			m, err := config.QsshConfig.Remove(host)
+			m, err := config.QSSHConfig.Remove(host)
 			if err != nil {
 				panic(err)
 			}

@@ -21,7 +21,7 @@ qssh config list
 qssh cfg ls
 `,
 	Run: func(cmd *cobra.Command, args []string) {
-		machines, _ := config.QsshConfig.List()
+		machines, _ := config.QSSHConfig.List()
 		for i, m := range machines {
 			fmt.Printf("%v\t%v\n", i, m.Host)
 		}

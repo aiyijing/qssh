@@ -26,14 +26,14 @@ qssh config add root@192.168.1.1 -P admin
 qssh config add 192.168.1.1 -u root -p 322 -k ~/root/.ssh/id_rsa`,
 	Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		u, host := util.ParseConnArgs(args[0])
+		u, host := util.ParseSSHURL(args[0])
 		if u != "" {
 			machine.User = u
 		}
 		if host != "" {
 			machine.Host = host
 		}
-		m, err := config.QsshConfig.Add(&machine, force)
+		m, err := config.QSSHConfig.Add(&machine, force)
 		if err != nil {
 			fmt.Printf("%v\n", err)
 			return
@@ -45,9 +45,9 @@ qssh config add 192.168.1.1 -u root -p 322 -k ~/root/.ssh/id_rsa`,
 func init() {
 	u, _ := user.Current()
 
-	addCmd.Flags().StringVarP(&(machine.User), "user", "u", u.Name, "ssh user")
-	addCmd.Flags().StringVarP(&(machine.Password), "password", "P", "", "ssh password")
-	addCmd.Flags().IntVarP(&(machine.Port), "port", "p", 22, "ssh port")
-	addCmd.Flags().StringVarP(&(machine.Key), "key", "k", "", "ssh key path")
-	addCmd.Flags().BoolVarP(&force, "force", "f", false, "force add")
+	addCmd.Flags().StringVarP(&(machine.User), "user", "u", u.Name, "user")
+	addCmd.Flags().StringVarP(&(machine.Password), "password", "P", "", "password")
+	addCmd.Flags().IntVarP(&(machine.Port), "port", "p", 22, "port")
+	addCmd.Flags().StringVarP(&(machine.Key), "key", "k", "", "private key path")
+	addCmd.Flags().BoolVarP(&force, "force", "f", false, "force to add")
 }

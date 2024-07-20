@@ -2,8 +2,8 @@ package util
 
 import "strings"
 
-func ParseConnArgs(connArgs string) (user string, host string) {
-	pairs := strings.SplitN(connArgs, "@", 2)
+func ParseSSHURL(sshURL string) (user string, host string) {
+	pairs := strings.SplitN(sshURL, "@", 2)
 	if len(pairs) != 2 {
 		return "", pairs[0]
 	}
