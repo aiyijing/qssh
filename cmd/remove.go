@@ -1,4 +1,4 @@
-package config
+package cmd
 
 import (
 	"fmt"
@@ -15,10 +15,10 @@ var removeCmd = &cobra.Command{
 	Long:    `remove machine`,
 	Example: `
 # Using the full command
-qssh config remove 192.168.1.1
+qssh remove 192.168.1.1
 
 # Using the shorthand command
-qssh cfg rm 192.168.1.1
+qssh rm 192.168.1.1
 
 `,
 	Args: cobra.ExactArgs(1),

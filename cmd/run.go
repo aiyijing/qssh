@@ -16,13 +16,13 @@ var (
 	host        string
 )
 
-var execCommand = &cobra.Command{
-	Use:   "exec [script]",
+var runCmd = &cobra.Command{
+	Use:   "run [script]",
 	Short: "Execute commands on remote hosts",
 	Long:  `Execute commands or scripts on hosts using batch processing.`,
 	Example: `
 #  Execute commands on remote hosts
-qssh exec "uname -r" --ignore-range 0-1 --host 192.168.1.101
+qssh run "uname -r" --ignore-range 0-1 --host 192.168.1.101
 `,
 	Args: cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
@@ -44,8 +44,8 @@ qssh exec "uname -r" --ignore-range 0-1 --host 192.168.1.101
 }
 
 func init() {
-	execCommand.Flags().StringVarP(&ignoreRange, "ignore-range", "i", "", "ignore machine range")
-	execCommand.Flags().StringVarP(&host, "host", "H", "", "special host")
+	runCmd.Flags().StringVarP(&ignoreRange, "ignore-range", "i", "", "ignore machine range")
+	runCmd.Flags().StringVarP(&host, "host", "H", "", "special host")
 }
 
 func batchExec(script string, machines map[int]*config.Machine) {

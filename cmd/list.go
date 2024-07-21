@@ -1,4 +1,4 @@
-package config
+package cmd
 
 import (
 	"fmt"
@@ -15,10 +15,10 @@ var listCmd = &cobra.Command{
 	Long:    `list machines`,
 	Example: `
 # Using the full command
-qssh config list
+qssh list
 
 # Using the shorthand command
-qssh cfg ls
+qssh ls
 `,
 	Run: func(cmd *cobra.Command, args []string) {
 		machines, _ := config.QSSHConfig.List()

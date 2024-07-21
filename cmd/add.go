@@ -1,4 +1,4 @@
-package config
+package cmd
 
 import (
 	"fmt"
@@ -20,10 +20,10 @@ var addCmd = &cobra.Command{
 	Short: "add machine",
 	Long:  `add machine`,
 	Example: `# Adding a machine with a password
-qssh config add root@192.168.1.1 -P admin
+qssh add root@192.168.1.1 -P admin
 
 # Adding a machine with a private key
-qssh config add 192.168.1.1 -u root -p 322 -k ~/root/.ssh/id_rsa`,
+qssh add 192.168.1.1 -u root -p 322 -k ~/root/.ssh/id_rsa`,
 	Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		u, host := util.ParseSSHURL(args[0])

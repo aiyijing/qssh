@@ -2,8 +2,6 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-
-	"github.com/aiyijing/qssh/cmd/config"
 )
 
 var RootCmd = &cobra.Command{
@@ -13,7 +11,9 @@ var RootCmd = &cobra.Command{
 }
 
 func init() {
-	RootCmd.AddCommand(config.ConfigCmd)
 	RootCmd.AddCommand(sshCmd)
-	RootCmd.AddCommand(execCommand)
+	RootCmd.AddCommand(runCmd)
+	RootCmd.AddCommand(addCmd)
+	RootCmd.AddCommand(listCmd)
+	RootCmd.AddCommand(removeCmd)
 }
