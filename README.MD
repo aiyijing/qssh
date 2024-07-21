@@ -31,9 +31,9 @@ go build -o qssh
 ### 批量执行命令
 
 ```sh
-./qssh config add root@192.168.1.1  -k /root/.ssh/id_rsa
-./qssh config add root@192.168.1.2  -k /root/.ssh/id_rsa
-./qssh exec "uname -r"
+./qssh add root@192.168.1.1  -k /root/.ssh/id_rsa
+./qssh add root@192.168.1.2  -k /root/.ssh/id_rsa
+./qssh run "uname -r"
 [0] 192.168.88.101
 5.15.0-78-generic
 
