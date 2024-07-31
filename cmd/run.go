@@ -11,41 +11,42 @@ import (
 	"github.com/aiyijing/qssh/pkg/util"
 )
 
-var (
-	ignoreRange string
-	host        string
-)
+type RunOptions struct {
+	IgnoreRange string
+	Host        string
+}
 
-var runCmd = &cobra.Command{
-	Use:   "run [script]",
-	Short: "Execute commands on remote hosts",
-	Long:  `Execute commands or scripts on hosts using batch processing.`,
-	Example: `
+func NewRunCommand() *cobra.Command {
+	var o = &RunOptions{}
+	runCmd := &cobra.Command{
+		Use:   "run [script]",
+		Short: "Execute commands on remote hosts",
+		Long:  `Execute commands or scripts on hosts using batch processing.`,
+		Example: `
 #  Execute commands on remote hosts
 qssh run "uname -r" --ignore-range 0-1 --host 192.168.1.101
 `,
-	Args: cobra.MinimumNArgs(1),
-	Run: func(cmd *cobra.Command, args []string) {
-		var (
-			err    error
-			rgs    util.Ranges
-			script = args[0]
-		)
-		if ignoreRange != "" {
-			rgs, err = util.ParseRanges(ignoreRange)
-			if err != nil {
-				fmt.Printf("%v\n", err)
-				os.Exit(1)
+		Args: cobra.MinimumNArgs(1),
+		Run: func(cmd *cobra.Command, args []string) {
+			var (
+				err    error
+				rgs    util.Ranges
+				script = args[0]
+			)
+			if o.IgnoreRange != "" {
+				rgs, err = util.ParseRanges(o.IgnoreRange)
+				if err != nil {
+					fmt.Printf("%v\n", err)
+					os.Exit(1)
+				}
 			}
-		}
-		machines := listMachinesByRange(rgs, host)
-		batchExec(script, machines)
-	},
-}
-
-func init() {
-	runCmd.Flags().StringVarP(&ignoreRange, "ignore-range", "i", "", "ignore machine range")
-	runCmd.Flags().StringVarP(&host, "host", "H", "", "special host")
+			machines := listMachinesByRange(rgs, o.Host)
+			batchExec(script, machines)
+		},
+	}
+	runCmd.Flags().StringVarP(&o.IgnoreRange, "ignore-range", "i", "", "ignore machine range")
+	runCmd.Flags().StringVarP(&o.Host, "host", "H", "", "special host")
+	return runCmd
 }
 
 func batchExec(script string, machines map[int]*config.Machine) {

@@ -11,9 +11,9 @@ var RootCmd = &cobra.Command{
 }
 
 func init() {
-	RootCmd.AddCommand(sshCmd)
-	RootCmd.AddCommand(runCmd)
-	RootCmd.AddCommand(addCmd)
-	RootCmd.AddCommand(listCmd)
-	RootCmd.AddCommand(removeCmd)
+	RootCmd.AddCommand(NewSSHCommand())
+	RootCmd.AddCommand(NewRunCommand())
+	RootCmd.AddCommand(NewAddCommand())
+	RootCmd.AddCommand(NewListCommand())
+	RootCmd.AddCommand(NewRemoveCommand())
 }
